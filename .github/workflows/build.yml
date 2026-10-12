@@ -269,11 +269,11 @@ jobs:
       shell: bash
       run: |
         set -euo pipefail
-        # KernelSU-Next (next) always uses the latest susfs4ksu gki branch tip so
+        # KernelSU-Next (next) and ReSukiSU (resukisu) always uses the latest susfs4ksu gki branch tip so
         # SUSFS stays API-matched to the always-latest KernelSU-Next tree. All
-        # other roots (kernelsu, resukisu, sukisu-ultra) use the pinned
+        # other roots (kernelsu, sukisu-ultra) use the pinned
         # verified SUSFS commit.
-        if [ "${{ inputs.root_flavor }}" = "next" ]; then
+        if [ "${{ inputs.root_flavor }}" = "next" ] || [ "${{ inputs.root_flavor }}" = "resukisu" ]; then
           BRANCH="gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}"
           SUSFS_COMMIT="$(git ls-remote https://gitlab.com/simonpunk/susfs4ksu.git "refs/heads/${BRANCH}" | cut -f1)"
           echo "KernelSU-Next: resolving SUSFS at latest on ${BRANCH} -> ${SUSFS_COMMIT}"
