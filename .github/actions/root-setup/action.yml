@@ -31,9 +31,9 @@ runs:
             manager="KernelSU Next Manager"
             ;;
           resukisu)
-            repo="https://github.com/ReSukiSU/ReSukiSU.git"
-            directory="ReSukiSU"
-            manager="ReSukiSU Manager"
+            repo="https://github.com/Baka-SU/BakaSU.git"
+            directory="BakaSU"
+            manager="BakaSU Manager"
             ;;
           sukisu-ultra)
             repo="https://github.com/SukiSU-Ultra/SukiSU-Ultra.git"
