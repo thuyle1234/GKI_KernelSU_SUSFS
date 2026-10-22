@@ -22,7 +22,7 @@ on:
         type: string
         default: ""
       root_flavor:
-        description: "Mutually exclusive root implementation (kernelsu, next, bakasu, sukisu-ultra, or none)"
+        description: "Mutually exclusive root implementation (kernelsu, next, bakasu, finasu, sukisu-ultra, or none)"
         required: false
         type: string
         default: ""
@@ -320,13 +320,6 @@ jobs:
     # stock-configs may be skipped on non-producer legs (produce_stock_configs=false)
     needs: [generate-matrix, stock-configs]
     if: ${{ !cancelled() && needs.generate-matrix.result == 'success' }}
-    concurrency:
-      # Must include every matrix field that varies. The old key was only
-      # root_flavor + version, so every patch level of a family shared one
-      # group: with cancel-in-progress: false they queued instead of running
-      # in parallel, and an "All" dispatch compiled one kernel at a time.
-      group: prepare-${{ inputs.root_flavor }}-${{ matrix.version }}-${{ matrix.sublevel }}-${{ matrix.os_patch_level }}-${{ matrix.variant }}
-      cancel-in-progress: false
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
